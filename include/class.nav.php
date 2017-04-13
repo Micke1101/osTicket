@@ -347,6 +347,11 @@ class UserNav {
                     $navs['tickets']=array('desc'=>sprintf(__('Tickets (%d)'),$user->getNumTickets($user->canSeeOrgTickets())),
                                            'href'=>'tickets.php',
                                             'title'=>__('Show all tickets'));
+					if($user->canSeeOrgTickets()){
+						$navs['requests']=array('desc'=>sprintf(__('Requests (%d)'),$user->getNumTickets($user->canSeeOrgTickets())),
+                                           'href'=>'requests.php',
+                                            'title'=>__('Show all requests'));
+					}
                 } else {
                     $navs['tickets']=array('desc'=>__('View Ticket Thread'),
                                            'href'=>sprintf('tickets.php?id=%d',$user->getTicketId()),
