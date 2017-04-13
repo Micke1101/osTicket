@@ -15,9 +15,9 @@ if($_REQUEST['id'] && $_REQUEST['change']) {
     }
 	if($ticket){
 		if(strtolower($_REQUEST['change']) == 'approved'){
-			$ticket->setStatusId(9);
+			$ticket->setStatus(9);
 		} elseif(strtolower($_REQUEST['change']) == 'denied'){
-			$ticket->setStatusId(10);
+			$ticket->setStatus(10);
 		} else {
 			$errors['err']=__('Invalid change.');
 			$ticket=null;
