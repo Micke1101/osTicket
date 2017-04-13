@@ -348,8 +348,7 @@ class UserNav {
                                            'href'=>'tickets.php',
                                             'title'=>__('Show all tickets'));
 					if($user->canSeeOrgTickets()){
-						$navs['requests']=array('desc'=>sprintf(__('Requests (%d)'),$user->getNumTickets($user->canSeeOrgTickets())),
-                                           'href'=>'requests.php',
+						$navs['requests']=array('desc'=>__('Requests'),'href'=>'requests.php',
                                             'title'=>__('Show all requests'));
 					}
                 } else {

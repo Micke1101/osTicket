@@ -386,6 +386,9 @@ body {
 #nav li a.tickets {
   background-image: url('../images/icons/tix.png');
 }
+#nav li a.requests {
+  background-image: url('../images/icons/request.png');
+}
 #content {
   padding: 20px 0;
   margin: 0 20px;
@@ -1281,4 +1284,13 @@ img.avatar {
     font-weight: bold;
     margin-bottom: 0.3em;
     font-size: 1.1em;
+}
+form#merge-form .select2-selection--single, form#merge-form .select2-selection__rendered {
+    height: 26px;
+	border-right: none;
+	border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+form#merge-form .select2-container{
+	margin-right: -1px;
 }
