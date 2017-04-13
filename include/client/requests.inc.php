@@ -115,7 +115,7 @@ $tickets->values(
         }
 
      } else {
-         echo '<tr><td colspan="5">'.__('Your query did not match any records').'</td></tr>';
+         echo '<tr><td colspan="6">'.__('Your query did not match any records').'</td></tr>';
      }
     ?>
     </tbody>
