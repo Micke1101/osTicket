@@ -214,6 +214,9 @@ class OsticketConfig extends Config {
         'ticket_lock' => 2, // Lock on activity
         'max_open_tickets' => 0,
         'files_req_auth' => 1,
+        'waiting_for_approval_status' => 1,
+		'approved_status' => 2,
+		'denied_status' => 3,
     );
 
     function __construct($section=null) {
@@ -766,6 +769,18 @@ class OsticketConfig extends Config {
         return $s->next($this->getDefaultTicketNumberFormat(),
             array('Ticket', 'isTicketNumberUnique'));
     }
+    
+    function getDefaultStatusWaiting() {
+        return $this->get('waiting_for_approval_status');
+    }
+	
+	function getDefaultStatusApproved() {
+        return $this->get('approved_status');
+    }
+	
+	function getDefaultStatusDenied() {
+        return $this->get('denied_status');
+    }
 
     // Task sequence
     function getDefaultTaskSequence() {
@@ -1218,6 +1233,9 @@ class OsticketConfig extends Config {
         $f=array();
         $f['default_sla_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Selection required'));
         $f['default_ticket_status_id'] = array('type'=>'int', 'required'=>1, 'error'=>__('Selection required'));
+        $f['waiting_for_approval_status'] = array('type'=>'int', 'required'=>1, 'error'=>__('Selection required'));
+		$f['approved_status'] = array('type'=>'int', 'required'=>1, 'error'=>__('Selection required'));
+		$f['denied_status'] = array('type'=>'int', 'required'=>1, 'error'=>__('Selection required'));
         $f['default_priority_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Selection required'));
         $f['max_open_tickets']=array('type'=>'int',   'required'=>1, 'error'=>__('Enter valid numeric value'));
 
@@ -1250,6 +1268,9 @@ class OsticketConfig extends Config {
             'default_priority_id'=>$vars['default_priority_id'],
             'default_help_topic'=>$vars['default_help_topic'],
             'default_ticket_status_id'=>$vars['default_ticket_status_id'],
+            'waiting_for_approval_status'=>$vars['waiting_for_approval_status'],
+			'approved_status'=>$vars['approved_status'],
+			'denied_status'=>$vars['denied_status'],
             'default_sla_id'=>$vars['default_sla_id'],
             'max_open_tickets'=>$vars['max_open_tickets'],
             'enable_captcha'=>isset($vars['enable_captcha'])?1:0,
