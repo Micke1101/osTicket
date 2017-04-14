@@ -227,6 +227,104 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                 <i class="help-tip icon-question-sign" href="#ticket_attachment_settings"></i>
             </td>
         </tr>
+        <tr>
+            <th colspan="2">
+                <em><b><?php echo __('Approval');?></b>:  <?php echo __('Primary contacts can approve or deny tickets.');?></em>
+            </th>
+        </tr>
+		<tr>
+            <td width="180" class="required">
+                <?php echo __('Default waiting for approval status'); ?>:
+            </td>
+            <td>
+                <span>
+                <select name="waiting_for_approval_status">
+                <?php
+                $criteria = array('states' => array('open'));
+                foreach (TicketStatusList::getStatuses($criteria) as $status) {
+                    $name = $status->getName();
+                    if (!($isenabled = $status->isEnabled()))
+                        $name.=' '.__('(disabled)');
+
+                    echo sprintf('<option value="%d" %s %s>%s</option>',
+                            $status->getId(),
+                            ($config['waiting_for_approval_status'] ==
+                             $status->getId() && $isenabled)
+                             ? 'selected="selected"' : '',
+                             $isenabled ? '' : 'disabled="disabled"',
+                             $name
+                            );
+                }
+                ?>
+                </select>
+                &nbsp;
+                <span class="error">*&nbsp;<?php echo $errors['waiting_for_approval_status']; ?></span>
+                <i class="help-tip icon-question-sign" href="#waiting_for_approval_status"></i>
+                </span>
+            </td>
+        </tr>
+		<tr>
+            <td width="180" class="required">
+                <?php echo __('Default approved status'); ?>:
+            </td>
+            <td>
+                <span>
+                <select name="approved_status">
+                <?php
+                $criteria = array('states' => array('open'));
+                foreach (TicketStatusList::getStatuses($criteria) as $status) {
+                    $name = $status->getName();
+                    if (!($isenabled = $status->isEnabled()))
+                        $name.=' '.__('(disabled)');
+
+                    echo sprintf('<option value="%d" %s %s>%s</option>',
+                            $status->getId(),
+                            ($config['approved_status'] ==
+                             $status->getId() && $isenabled)
+                             ? 'selected="selected"' : '',
+                             $isenabled ? '' : 'disabled="disabled"',
+                             $name
+                            );
+                }
+                ?>
+                </select>
+                &nbsp;
+                <span class="error">*&nbsp;<?php echo $errors['approved_status']; ?></span>
+                <i class="help-tip icon-question-sign" href="#approved_status"></i>
+                </span>
+            </td>
+        </tr>
+		<tr>
+            <td width="180" class="required">
+                <?php echo __('Default denied status'); ?>:
+            </td>
+            <td>
+                <span>
+                <select name="denied_status">
+                <?php
+                $criteria = array('states' => array('closed'));
+                foreach (TicketStatusList::getStatuses($criteria) as $status) {
+                    $name = $status->getName();
+                    if (!($isenabled = $status->isEnabled()))
+                        $name.=' '.__('(disabled)');
+
+                    echo sprintf('<option value="%d" %s %s>%s</option>',
+                            $status->getId(),
+                            ($config['denied_status'] ==
+                             $status->getId() && $isenabled)
+                             ? 'selected="selected"' : '',
+                             $isenabled ? '' : 'disabled="disabled"',
+                             $name
+                            );
+                }
+                ?>
+                </select>
+                &nbsp;
+                <span class="error">*&nbsp;<?php echo $errors['denied_status']; ?></span>
+                <i class="help-tip icon-question-sign" href="#denied_status"></i>
+                </span>
+            </td>
+        </tr>
     </tbody>
 </table>
 </div>
