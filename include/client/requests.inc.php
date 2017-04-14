@@ -10,7 +10,7 @@ $sortOptions=array('id'=>'number', 'subject'=>'cdata__subject',
                     'status'=>'status__name', 'dept'=>'dept__name','date'=>'created');
 
 $basic_filter = Ticket::objects();
-$basic_filter->filter(array('status' => 8));
+$basic_filter->filter(array('status' => $cfg->getDefaultStatusWaiting()));
 
 $visibility = $basic_filter->copy()
     ->values_flat('ticket_id')
