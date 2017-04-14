@@ -13,16 +13,16 @@ if($_REQUEST['id'] && $_REQUEST['change']) {
         $errors['err']=__('Unknown or invalid ticket ID.');
         $ticket=null;
     }
-	if($ticket){
-		if(strtolower($_REQUEST['change']) == 'approved'){
-			$ticket->setStatus($cfg->getDefaultStatusApproved());
-		} elseif(strtolower($_REQUEST['change']) == 'denied'){
-			$ticket->setStatus($cfg->getDefaultStatusDenied());
-		} else {
-			$errors['err']=__('Invalid change.');
-			$ticket=null;
-		}
-	}
+    if($ticket){
+        if(strtolower($_REQUEST['change']) == 'approved'){
+            $ticket->setStatus($cfg->getDefaultStatusApproved());
+        } elseif(strtolower($_REQUEST['change']) == 'denied'){
+            $ticket->setStatus($cfg->getDefaultStatusDenied());
+        } else {
+            $errors['err']=__('Invalid change.');
+            $ticket=null;
+        }
+    }
 }
 
 $nav->setActiveNav('requests');

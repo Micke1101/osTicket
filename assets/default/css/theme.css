@@ -1285,12 +1285,3 @@ img.avatar {
     margin-bottom: 0.3em;
     font-size: 1.1em;
 }
-form#merge-form .select2-selection--single, form#merge-form .select2-selection__rendered {
-    height: 26px;
-	border-right: none;
-	border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-form#merge-form .select2-container{
-	margin-right: -1px;
-}

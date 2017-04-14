@@ -21,8 +21,8 @@ $visibility = $basic_filter->copy()
     , false);
 
 $visibility = $visibility->union(
-	$basic_filter->copy()->values_flat('ticket_id')
-		->filter(array('user__org_id' => $thisclient->getOrgId()))
+    $basic_filter->copy()->values_flat('ticket_id')
+        ->filter(array('user__org_id' => $thisclient->getOrgId()))
 , false);
 
 $tickets->distinct('ticket_id');
@@ -38,7 +38,7 @@ $pageNav->paginate($tickets);
 $showing =$total ? $pageNav->showing() : "";
 if(!$results_type)
 {
-	$results_type=ucfirst($status).' '.__('Requests');
+    $results_type=ucfirst($status).' '.__('Requests');
 }
 $showing.=($status)?(' '.$results_type):' '.__('All Requests');
 
@@ -66,7 +66,7 @@ $tickets->values(
             <th width="100">
                 <?php echo __('Create Date');?>
             </th>
-			<th width="120">
+            <th width="120">
                 <?php echo __('User');?>
             </th>
             <th width="300">
@@ -75,7 +75,7 @@ $tickets->values(
             <th width="70">
                 <?php echo __('Approve');?>
             </th>
-			<th width="70">
+            <th width="70">
                 <?php echo __('Deny');?>
             </th>
         </tr>
@@ -108,7 +108,7 @@ $tickets->values(
                 <td>
                     <div style="max-height: 1.2em; max-width: 320px;" class="link truncate" href="tickets.php?id=<?php echo $T['ticket_id']; ?>"><?php echo $subject; ?></div>
                 </td>
-				<td><a href="requests.php?id=<?php echo $T['ticket_id']; ?>&change=approved">Approve</a></td>
+                <td><a href="requests.php?id=<?php echo $T['ticket_id']; ?>&change=approved">Approve</a></td>
                 <td><a href="requests.php?id=<?php echo $T['ticket_id']; ?>&change=denied">Deny</a></td>
             </tr>
         <?php

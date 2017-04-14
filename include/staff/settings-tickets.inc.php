@@ -232,7 +232,7 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                 <em><b><?php echo __('Approval');?></b>:  <?php echo __('Primary contacts can approve or deny tickets.');?></em>
             </th>
         </tr>
-		<tr>
+        <tr>
             <td width="180" class="required">
                 <?php echo __('Default waiting for approval status'); ?>:
             </td>
@@ -263,7 +263,7 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                 </span>
             </td>
         </tr>
-		<tr>
+        <tr>
             <td width="180" class="required">
                 <?php echo __('Default approved status'); ?>:
             </td>
@@ -294,7 +294,7 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                 </span>
             </td>
         </tr>
-		<tr>
+        <tr>
             <td width="180" class="required">
                 <?php echo __('Default denied status'); ?>:
             </td>
