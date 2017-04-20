@@ -3284,17 +3284,33 @@ class ChoicesWidget extends Widget {
 
     function emitChoices($choices, $values=array(), $have_def=false, $def_key=null) {
         reset($choices);
+        global $thisstaff, $thisclient;
+        $grouping = false;
         if (is_array(current($choices)) || current($choices) instanceof Traversable)
             return $this->emitComplexChoices($choices, $values, $have_def, $def_key);
 
         foreach ($choices as $key => $name) {
             if (!$have_def && $key == $def_key)
                 continue; ?>
-            <option value="<?php echo $key; ?>" <?php
-                if (isset($values[$key])) echo 'selected="selected"';
-            ?>><?php echo Format::htmlchars($name); ?></option>
+            <?php if(strpos($name, '|') === 0) : ?>
+                <?php if(strlen($name) === 1) : ?>
+                    </optgroup>
+                <?php else: ?>
+                    <?php $grouping = true; ?>
+                    <optgroup label="<?php echo Format::htmlchars(preg_replace("/^\|/", "", $name)); ?>">
+                <?php endif; ?>
+            <?php else : ?>
+                <option value="<?php echo $key; ?>" <?php
+                    if (isset($values[$key])) echo 'selected="selected"';
+                    if (!($thisstaff || ($thisclient && $thisclient->isPrimaryContact()) || strpos($name, '*') !== 0)) echo ' disabled';
+                ?>><?php echo Format::htmlchars(preg_replace("/^\*/", "", $name)); ?></option>
+            <?php endif; ?>
         <?php
         }
+        ?>
+        <?php if($grouping) : ?>
+            </optgroup>
+        <?php endif; ?><?php
     }
 
     function emitComplexChoices($choices, $values=array(), $have_def=false, $def_key=null) {
