@@ -93,6 +93,47 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['pid']; ?></span>
             </td>
         </tr>
+        <tr>
+            <td width="180" class="required">
+                <?php echo __('Limit help topic');?>:
+            </td>
+            <td>
+                <input type="radio" name="islimited" value="1" <?php echo $info['islimited']?'checked="checked"':''; ?>> <?php echo __('Active'); ?>
+                <input type="radio" name="islimited" value="0" <?php echo !$info['islimited']?'checked="checked"':''; ?>> <?php echo __('Disabled'); ?>
+                &nbsp;<span class="error">*&nbsp;</span> <i class="help-tip icon-question-sign" href="#limited"></i>
+            </td>
+        </tr>
+        <tr>
+            <td width="180">
+                <?php echo __('Limitations');?>:
+            </td>
+            <td>
+                <input type="hidden" name="limitations_pids" value="<?php echo $info['limitations']; ?>">
+                <select name="limitations" multiple="multiple" style="width:280px">
+                    <option value="">&mdash; <?php echo __('None'); ?> &mdash;</option>
+                    <?php $limitations = explode(",", $info['limitations']); ?>
+                    <optgroup label="<?php echo __('Organizations'); ?>"><?php
+                        $orgs = Organization::objects();
+                        $orgs->values('id', 'name');
+                        $orgs->order_by('name');
+                        foreach ($orgs as $org) {
+                            echo "<option value='O:" . $org['id'] . "'" . (in_array("O:" . $org['id'], $limitations) ? " selected" : "") . ">" . $org['name'] . "</option>";
+                        }
+                    ?>
+                    </optgroup>
+                    <optgroup label="<?php echo __('Users'); ?>"><?php
+                        $users = User::objects();
+                        $users->values('id', 'name');
+                        $users->order_by('name');
+                        foreach ($users as $user) {
+                            echo "<option value='U:" . $user['id'] . "'" . (in_array("U:" . $user['id'], $limitations) ? " selected" : "") . ">" . $user['name'] . "</option>";
+                        }
+                        ?>
+                    </optgroup>
+                </select> <i class="help-tip icon-question-sign" href="#limitations_pids"></i>
+                &nbsp;<span class="error">&nbsp;<?php echo $errors['pid']; ?></span>
+            </td>
+        </tr>
 
     </tbody>
     </table>
@@ -414,6 +455,9 @@ foreach ($forms as $F) {
 </form>
 <script type="text/javascript">
 $(function() {
+    $("select[name=limitations]").select2();
+    $("select[name=limitations]").on("select2:select", function (e) { $("input[name=limitations_pids]").val($("select[name=limitations]").val()); });
+    $("select[name=limitations]").on("select2:unselect", function (e) { $("input[name=limitations_pids]").val($("select[name=limitations]").val()); });
     var request = null,
       update_example = function() {
       request && request.abort();

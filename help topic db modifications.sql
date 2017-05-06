@@ -1,0 +1,2 @@
+ALTER TABLE `ost_help_topic` ADD `islimited` TINYINT(1) NOT NULL DEFAULT '0' AFTER `ispublic`;
+ALTER TABLE `ost_help_topic` ADD `limitations` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `number_format`;

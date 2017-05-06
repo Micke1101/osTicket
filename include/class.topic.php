@@ -201,6 +201,17 @@ implements TemplateVariable {
     function isPublic() {
         return ($this->ispublic);
     }
+	
+    function isLimited(){
+        return ($this->islimited);
+    }
+    
+    function clientCanSee($client){
+        $orgId = $client->getOrgId();
+        $clientId = $client->getId();
+        $limitations = explode(",", $this->limitations);
+        return in_array("O:" . $orgId, $limitations) || in_array("U:" . $clientId, $limitations);
+    }
 
     function getHashtable() {
         return $this->ht;
@@ -420,8 +431,10 @@ implements TemplateVariable {
         $this->page_id = $vars['page_id'] ?: 0;
         $this->isactive = !!$vars['isactive'];
         $this->ispublic = !!$vars['ispublic'];
+        $this->islimited = !!$vars['islimited'];
         $this->sequence_id = $vars['custom-numbers'] ? $vars['sequence_id'] : 0;
         $this->number_format = $vars['custom-numbers'] ? $vars['number_format'] : '';
+        $this->limitations = $vars['limitations_pids'] ?: '';
         $this->flags = $vars['custom-numbers'] ? self::FLAG_CUSTOM_NUMBERS : 0;
         $this->noautoresp = !!$vars['noautoresp'];
         $this->notes = Format::sanitize($vars['notes']);
