@@ -454,7 +454,9 @@ foreach ($forms as $F) {
 </form>
 <script type="text/javascript">
 $(function() {
-    $("select[name=limitations]").select2();
+    $("select[name=limitations]").select2({
+        placeholder: "<?php echo __('None');?>"
+    });
     $("select[name=limitations]").on("change", function (e) { $("input[name=limitations_pids]").val($("select[name=limitations]").val()); });
     var request = null,
       update_example = function() {
