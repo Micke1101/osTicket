@@ -2009,7 +2009,6 @@ class ViewEvent extends ThreadEvent {
     static $state = 'viewed';
 }
 
-
 class ThreadEntryBody /* extends SplString */ {
 
     static $types = array('text', 'html');
