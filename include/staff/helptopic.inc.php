@@ -110,7 +110,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td>
                 <input type="hidden" name="limitations_pids" value="<?php echo $info['limitations']; ?>">
                 <select name="limitations" multiple="multiple" style="width:280px">
-                    <option value="">&mdash; <?php echo __('None'); ?> &mdash;</option>
                     <?php $limitations = explode(",", $info['limitations']); ?>
                     <optgroup label="<?php echo __('Organizations'); ?>"><?php
                         $orgs = Organization::objects();
