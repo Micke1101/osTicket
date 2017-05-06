@@ -207,10 +207,16 @@ implements TemplateVariable {
     }
     
     function clientCanSee($client){
+        if(($parent = $this->getParent()) && !$parent->clientCanSee($client))
+            return false;
+        
+        if(!$client)
+            return !$this->isLimited();
+        
         $orgId = $client->getOrgId();
         $clientId = $client->getId();
         $limitations = explode(",", $this->limitations);
-        return in_array("O:" . $orgId, $limitations) || in_array("U:" . $clientId, $limitations);
+        return !$this->isLimited() || in_array("O:" . $orgId, $limitations) || in_array("U:" . $clientId, $limitations);
     }
 
     function getHashtable() {
